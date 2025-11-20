@@ -1,0 +1,10 @@
+# Dependency directory
+/node_modules
+
+# Build output directory
+/dist
+/build
+
+# Log files and cache
+npm-debug.log
+.DS_Store
