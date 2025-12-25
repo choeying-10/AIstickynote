@@ -6,4 +6,3 @@ import { defineConfig } from "vite";
       base: '/AIstickynote/',
       plugins: [react()],
   });
-  

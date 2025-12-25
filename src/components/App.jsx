@@ -27,6 +27,7 @@ const INITIAL_MESSAGES = [
 
 const App = () => {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
+  const [input,setInput] =useState("");
 
   const pinnedNotes = messages.filter(
     (msg) => msg.role === "ai" && msg.isPinned
@@ -38,6 +39,19 @@ const App = () => {
         msg.id === id ? { ...msg, isPinned: !msg.isPinned } : msg
       )
     );
+  };
+
+  const handleMessage = (e) => {
+    e.preventDefault();
+    
+    const newMessage = {
+      id: `m ${messages.length+1}`,
+      role: "user",
+      content: input
+    };
+
+    setMessages([...messages,newMessage]);
+    setInput("");
   };
 
   return (
@@ -59,8 +73,12 @@ const App = () => {
             />
           )
         )}
+      
+        <form onSubmit={handleMessage}>
+          <input type="text" placeholder="enter your prompt" value={input} onChange={(e) => setInput(e.target.value)}/>
+          <button> Submit </button>
+        </form>      
       </div>
-
       <NoteSidebar pinnedNotes={pinnedNotes} onPinToggle={handlePinToggle} />
     </div>
   );
